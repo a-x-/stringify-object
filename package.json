@@ -1,9 +1,9 @@
 {
-  "name": "stringify-object",
-  "version": "2.3.2",
+  "name": "stringify-object-with-oneline",
+  "version": "2.3.2-2",
   "description": "Stringify an object/array like JSON.stringify just without all the double-quotes",
   "license": "BSD-2-Clause",
-  "repository": "yeoman/stringify-object",
+  "repository": "akellbl4/stringify-object",
   "author": {
     "name": "Sindre Sorhus",
     "email": "sindresorhus@gmail.com",
