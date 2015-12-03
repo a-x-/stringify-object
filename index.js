@@ -56,7 +56,7 @@ module.exports = function (val, opts, pad) {
 
 				var eol = (objKeys.length - 1 === i ? '' : ',') + opts.newline;
 				var key = /^[a-z$_][a-z$_0-9]*$/i.test(el) ? el : stringify(el, opts);
-				return pad + opts.indent + key + (opts.online ? ':' : ': ') + stringify(val[el], opts, pad + opts.indent) + eol;
+				return pad + opts.indent + key + (opts.oneline ? ':' : ': ') + stringify(val[el], opts, pad + opts.indent) + eol;
 			}).join('') + pad + '}';
 
 			seen.pop(val);
