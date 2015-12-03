@@ -1,14 +1,16 @@
 'use strict';
-var isRegexp = require('is-regexp');
-var isPlainObj = require('is-plain-obj');
+var isRegexp = require('is-regexp'),
+	isPlainObj = require('is-plain-obj');
 
 module.exports = function (val, opts, pad) {
 	var seen = [];
 
 	return (function stringify(val, opts, pad) {
 		opts = opts || {};
-		opts.indent = opts.indent || '\t';
+		opts.indent = typeof opts.indent === 'string' ? opts.indent : '\t';
 		pad = pad || '';
+
+		opts.newline = opts.oneline ? '' : '\n';
 
 		if (val === null ||
 			val === undefined ||
@@ -28,8 +30,8 @@ module.exports = function (val, opts, pad) {
 				return '[]';
 			}
 
-			return '[\n' + val.map(function (el, i) {
-				var eol = val.length - 1 === i ? '\n' : ',\n';
+			return '[' +  opts.newline + val.map(function (el, i) {
+				var eol = val.length - 1 === i ? opts.newline : ',' + opts.newline;
 				return pad + opts.indent + stringify(el, opts, pad + opts.indent) + eol;
 			}).join('') + pad + ']';
 		}
@@ -47,14 +49,14 @@ module.exports = function (val, opts, pad) {
 
 			seen.push(val);
 
-			var ret = '{\n' + objKeys.map(function (el, i) {
+			var ret = '{' + opts.newline + objKeys.map(function (el, i) {
 				if (opts.filter && !opts.filter(val, el)) {
 					return '';
 				}
 
-				var eol = objKeys.length - 1 === i ? '\n' : ',\n';
+				var eol = (objKeys.length - 1 === i ? '' : ',') + opts.newline;
 				var key = /^[a-z$_][a-z$_0-9]*$/i.test(el) ? el : stringify(el, opts);
-				return pad + opts.indent + key + ': ' + stringify(val[el], opts, pad + opts.indent) + eol;
+				return pad + opts.indent + key + (opts.online ? ':' : ': ') + stringify(val[el], opts, pad + opts.indent) + eol;
 			}).join('') + pad + '}';
 
 			seen.pop(val);

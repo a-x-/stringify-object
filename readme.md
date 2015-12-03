@@ -72,6 +72,13 @@ Default: `true`
 
 Set to false to get double-quoted strings.
 
+##### oneline
+
+Type: `boolean`  
+Default: `false`
+
+Set to generate object in one line.
+
 ##### filter(obj, prop)
 
 Type: `function`
