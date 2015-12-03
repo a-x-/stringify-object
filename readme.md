@@ -10,7 +10,7 @@ It also handles circular references and lets you specify quote type.
 ## Install
 
 ```
-$ npm install --save stringify-object
+$ npm install --save stringify-object-with-oneline
 ```
 
 
